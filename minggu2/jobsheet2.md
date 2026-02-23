@@ -8,13 +8,13 @@
 
 ## Praktikum 2.1 Identifikasi CPU dan Memori
 1. Tampilkan informasi CPU: (lscpu)
-Gambar:
+Gambar: <img ![alt text](image-1.png) >
 
 2. Tampilkan ringkasan memori: (free -h)
-Gambar:
+Gambar: <img ![alt text](image-2.png)>
 
 3. (Opsional) cek informasi hardware dari DMI/BIOS (butuh sudo): (sudo dmidecode -t system)
-Gambar:
+Gambar: <img ![alt text](image.png)>
 ### Latihan 2.1 
 Soal :
 1. Catat: (1) jumlah CPU(s), core/thread, (2) total RAM, (3) total swap. 
@@ -27,15 +27,15 @@ Jawaban :
 
 ## Praktikum 2.2 — Identifikasi Perangkat PCI/USB dan Driver
 1. Lihat daftar perangkat PCI: (lspci)
-Gambar :
+Gambar : <img ![alt text](image-3.png)>
 2. Lihat perangkat PCI beserta driver kernel yang digunakan: (lspci - nnk)
-Gambar : 
+Gambar : <img ![alt text](image-4.png)>
 3. Fokus pada NIC (Ethernet) untuk mencari modul driver: (lspci - nnk | grep - A3 -i ethernet)
-Gambar :
+Gambar : <img ![alt text](image-5.png)>
 4. Lihat perangkat USB : (lsusb)
-Gambar :
+Gambar : <img ![alt text](image-6.png)>
 5. Lihat topologi USB (tree): (lsusb -t)
-Gambar : 
+Gambar : <img ![alt text](image-7.png)>
 ### Latihan 2.2
 Soal :
 1. Temukan 1 perangkat PCI (misal NIC) dan tuliskan: Vendor:Device ID (angka heksadesimal), nama driver/modul kernel, dan deskripsi singkat fungsinya.
@@ -46,34 +46,35 @@ Jawaban :
 
 ## Praktikum 2.3 — Identifikasi Storage dan Filesystem
 1. Lihat daftar disk/partisi: (lsblk -f)
-Gambar :
+Gambar : <img ![alt text](image-8.png)>
 2. Tampilkan UUID dan tipe filesystem: (sudo blkid)
-Gambar :
+Gambar : <img ![alt text](image-9.png)>
 3. Lihat mount point untuk root filesystem: (findmnt /)
-Gambar :
+Gambar : <img ![alt text](image-10.png)>
 
 ## 1.2 Modul Kernel dan Driver Perangkat ##
 
 
 ## Praktikum 2.4 — Melihat Modul Aktif dan Informasinya
 1. Cek versi kernel: (uname -r)
-Gambar :
+Gambar : <img ![alt text](image-11.png)>
 2. Tampilkan daftar modul aktif: (lsmod | head)
-Gambar : 
+Gambar : <img ![alt text](image-12.png)>
 3.  Pilih salah satu modul (contoh aman: loop) dan lihat detailnya: (modinfo loop)
-Gambar :
+Gambar : <img ![alt text](image-13.png)>
 4. Muat modul (jika belum aktif), lalu verifikasi: (sudo modprobe loop) dan (lsmod | grep -i loop)
-Gambar : 
+Gambar : <img ![alt text](image-14.png)>
 5. (Opsional) lihat pesan kernel terbaru: (dmesg -T | tail -n 20)
+Gambar : <img ![alt text](image-15.png)>
 
 
 ## Praktikum 2.5 — Konfigurasi Auto-load dan Blacklist
 1. Buat file auto-load: ( echo " loop " | sudo tee / etc / modules - load . d / loop . conf)
-Gambar :
+Gambar : <img ![alt text](image-16.png)>
 2. Simulasikan verifikasi (tanpa reboot) dengan memastikan modul sudah aktif: ( lsmod | grep -i loop)
-Gambar :
+Gambar : <img ![alt text](image-17.png)>
 3. (Opsional, konsep) blacklist modul: (# echo " blacklist loop " | sudo tee / etc/ modprobe .d/blacklist - loop . conf)
-Gambar :
+Gambar : <img ![alt text](image-18.png)>
 
 
 ## 1.3 Sistem File dan /dev di Linux ##
@@ -81,11 +82,11 @@ Gambar :
 
 ## Praktikum 2.6 — Mengenali Block vs Character Device
 1. Manajemen Perangkat Keras & Perintah Dasar Sistem Operasi : (ls -l / dev / sda)
-Gambar :
+Gambar : <img ![alt text](image-19.png)>
 2. Lihat detail device terminal: (ls -l / dev / tty)
-Gambar :
+Gambar : <img ![alt text](image-20.png)>
 3. Lihat disk dan partisi untuk mengaitkan dengan /dev : (lsblk)
-Gambar :
+Gambar : <img ![alt text](image-21.png)>
 ### Latihan 2.3
 Soal:
 1. Dari output ls -l, jelaskan perbedaan penanda file untuk block device dancharacter device. (Hint: karakter pertama pada permission string)
@@ -94,9 +95,9 @@ Jawaban :
 
 ## Praktikum 2.7 — Melihat Informasi udev
 1. Cek atribut udev untuk disk: ( udevadm info -- query = all -- name =/ dev / sda | head -n 30)
-Gambar : 
+Gambar : <img ![alt text](image-22.png)>
 2. (Opsional) monitor event udev (jalankan, lalu colok/lepas USB pada mesin fisik) : (sudo udevadm monitor)
-Gambar : 
+Gambar : <img ![alt text](image-23.png)>
 
 
 ## 1.4 Perintah Dasar Terminal Linux ##
