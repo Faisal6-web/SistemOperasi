@@ -105,17 +105,17 @@ Gambar : <img ![alt text](image-23.png)>
 
 ## Praktikum 2.8 — Membuat Workspace Praktikum
 1. Buat direktori praktikum dan masuk ke dalamnya: (mkdir -p ~/ praktikum - os / week02), (cd ~/ praktikum - os / week02) dan (pwd)
-Gambar :
+Gambar : <img ![alt text](image-24.png)>
 2. Buat beberapa file contoh: (touch notes . txt data . log config . txt) dan (ls - lah)
-Gambar : 
+Gambar : <img ![alt text](image-25.png)>
 3. Isi file log contoh (simulasi):
 - echo " INFO : service started " >> data . log
 - echo " WARN : disk usage high " >> data . log
 - echo " ERROR : failed to connect " >> data . log
 - cat data . log
-Gambar :
+Gambar : <img ![alt text](image-26.png)>
 4. Baca file dengan less: (less data . log)
-Gambar :
+Gambar : <img ![alt text](image-27.png)>
 
 
 ## 1.5 Manipulasi Teks ##
@@ -123,15 +123,16 @@ Gambar :
 
 ## Praktikum 2.9 — Pencarian Pola dengan grep
 1. Cari baris yang mengandung ERROR pada data.log: (grep " ERROR " data . log)
-Gambar : 
+Gambar : <img ![alt text](image-28.png)>
 2. Cari tanpa memperhatikan huruf besar/kecil: (grep -i " error " data . log)
-Gambar : 
+Gambar : <img ![alt text](image-29.png)>
 3. Tampilkan nomor baris: (grep -n " WARN " data . log)
-Gambar :
+Gambar : <img ![alt text](image-30.png)>
 4. Tampilkan baris yang tidak cocok (invert match): (grep -v " INFO " data . log)
-Gambar :
+Gambar : <img ![alt text](image-31.png)>
 ### Latihan 2.4
 1. Gunakan grep untuk menampilkan hanya baris yang mengandung INFO atau WARN dari data.log. (Hint: gunakan grep -E dengan pola alternatif)
+Jawaban : <img ![alt text](image-32.png)>
 
 ## Praktikum 2.10 — Substitusi dengan sed (Aman di File Latihan)
 1. Siapkan file konfigurasi latihan: 
@@ -141,23 +142,23 @@ Gambar :
 - SERVICE_NAME = myserver
 - EOF
 - cat config . txt
-Gambar : 
+Gambar : <img ![alt text](image-33.png)>
 2. Ganti dev menjadi prod (tanpa mengubah file asli): (sed ’s/ MODE =dev/ MODE = prod /’ config . txt)
-Gambar :
+Gambar : <img ![alt text](image-34.png)>
 3. Terapkan perubahan langsung ke file (-i): (sed -i ’s/ MODE =dev/ MODE = prod /’ config . txt) (cat config . txt)
-Gambar : 
+Gambar : <img ![alt text](image-35.png)>
 4. Ganti semua kemunculan kata (g untuk global), contoh ubah myserver menjadi node: 
 - (sed -i ’s/ myserver / node /g’ config . txt)
 - (cat config . txt)
-Gambar : 
+Gambar : <img ![alt text](image-36.png)>
 
 ## Praktikum 2.11 — Ekstraksi Kolom dengan awk
 1. Lihat output df -h: (df -h)
-Gambar : 
+Gambar : <img ![alt text](image-37.png)>
 2. Ambil kolom filesystem dan persentase pemakaian: (df -h | awk ’NR ==1 { print $1 , $5 , $6} NR >1 { print $1 , $5 , $6}’)
-Gambar :
+Gambar : <img ![alt text](image-38.png)>
 3. Filter hanya yang pemakaian disk di atas 80%: (df -h | awk ’NR ==1 || ($5 +0) > 80 { print $1 , $5 , $6}’)
-Gambar : 
+Gambar : <img ![alt text](image-39.png)>
 
 
 ## 1.6 Manajemen Proses ##
@@ -165,29 +166,29 @@ Gambar :
 
 ## Praktikum 2.12 — Melihat Proses dengan ps
 1. Tampilkan semua proses (format BSD): (ps aux | head)
-Gambar : 
+Gambar : <img ![alt text](image-40.png)>
 2. Cari proses tertentu (misal sshd): (ps aux | grep -i sshd)
-Gambar : 
+Gambar : <img ![alt text](image-41.png)>
 
 
 ## Praktikum 2.13 — Monitoring Real-time dengan top
 1. Jalankan top: (top)
-Gambar :
+Gambar : <img ![alt text](image-42.png)>
 2. Amati nilai load average, pemakaian CPU, dan proses teratas. Tekan q untuk keluar.
-Gambar :
+Gambar : <img ![alt text](image-43.png)>
 
 
 ## Praktikum 2.14 — Menghentikan Proses dengan kill
 1. Jalankan proses dummy di background: (sleep 300 &)
-Gambar :
+Gambar : <img ![alt text](image-44.png)>
 2. Cari PID proses sleep: (ps aux | grep -E " sleep 300 " | grep -v grep)
-Gambar :
+Gambar : <img ![alt text](image-45.png)>
 3. Hentikan dengan SIGTERM: ( kill < PID_ANDA >)
-Gambar : 
+Gambar : <img ![alt text](image-46.png)>
 4. Verifikasi proses berhenti: (ps aux | grep -E " sleep 300 " | grep -v grep)
-Gambar :
+Gambar : <img ![alt text](image-47.png)>
 5. (Opsional) Jika proses sulit untuk dihentikan dan Anda membutukan untuk menghentikan proses tersebut, gunakan SIGKILL: (kill -9 < PID_ANDA >)
-Gambar :
+Gambar : <img ![alt text](image-48.png)>
 
 
 ## 1.7 Pemantauan Sistem ##
@@ -196,24 +197,24 @@ Gambar :
 
 ## Praktikum 2.15 — Cek Disk, Load, dan Service
 1. Cek penggunaan disk: (df -h)
-Gambar :
+Gambar : <img ![alt text](image-49.png)>
 2. Cari direktori yang besar (contoh pada /var): (sudo du - sh / var /* 2 >/ dev / null | sort -h | tail -n 10)
-Gambar :
+Gambar : <img ![alt text](image-50.png)>
 3. Cek load dan uptime: (uptime)
-Gambar :
+Gambar : <img ![alt text](image-51.png)>
 4. Cek service yang gagal: (systemctl -- failed)
-Gambar :
+Gambar : <img ![alt text](image-52.png)>
 5. Ambil log error terbaru (jika ada indikasi masalah): (journalctl - xe | tail -n 50)
-Gambar :
+Gambar : <img ![alt text](image-53.png)>
 
 
 ## Praktikum 2.16 — Monitoring Port dan Koneksi (Network Basics)
 1. Lihat interface dan IP: (ip a)
-Gambar :
+Gambar : <img ![alt text](image-54.png)>
 2. Lihat routing table: (ip r)
-Gambar :
+Gambar : <img ![alt text](image-55.png)>
 3. Lihat port yang sedang listening: (sudo ss - tulpn)
-Gambar :
+Gambar : <img ![alt text](image-56.png)>
 ### Latihan 2.5
 Soal :
 1. Pilih satu port yang listening dari output ss -tulpn(misal port 22), lalu tuliskan service/proses yang membukanya. Jelaskan kegunaan port tersebut secara singkat.
@@ -225,22 +226,22 @@ Jawaban :
 ### LATIHAN ###
 1. Latihan 2.A
 Jalankan lspci -nnk. Pilih 1 perangkat PCI dan tuliskan: nama perangkat, ID vendor:device, dan kernel driver in use.
-Gambar :
+Gambar : <img >
 2. Latihan 2.B
 Tentukan device root filesystem dengan findmnt /. Lalu cocokkan dengan lsblk -f dan tuliskan tipe filesystem serta UUID-nya
-Gambar :
+Gambar : <img >
 3. Latihan 2.C
 Buat file server.log berisi minimal 10 baris dengan variasi kata: INFO, WARN, ERROR. Gunakan grep untuk menampilkan hanya baris ERROR.
-Gambar :
+Gambar : <img >
 4. Latihan 2.D
 Gunakan sed untuk mengganti semua kata server menjadi node pada file latihan. Tunjukkan sebelum dan sesudah.
-Gambar :
+Gambar : <img >
 5. Latihan 2.E
 Gunakan df -h lalu awk untuk menampilkan filesystem yang penggunaan disk di atas 70%.
-Gambar :
+Gambar : <img >
 6. Latihan 2.F
 Jalankan sleep 600 &. Temukan PID-nya dengan ps. Hentikan dengan SIGTERM. Jelaskan beda SIGTERM vs SIGKILL.
-Gambar :
+Gambar : <img >
 7. Latihan 2.G
 Gunakan systemctl –failed. Jika tidak ada yang gagal, pilih satu service aktif (misal ssh) dan tampilkan status serta 30 baris log terakhirnya.
-Gambar :
+Gambar : <img >
