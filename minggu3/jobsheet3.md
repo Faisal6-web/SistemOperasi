@@ -83,7 +83,7 @@ Script :
 find / -type f -name "*.conf" 2>/dev/null | tee daftar_conf.txt | wc -l
 head -n 10 daftar_conf.txt
 Hasil :
-<img ![Latihan-3.4](Hasil-Js3-Latihan 3.4-2.png)>
+<img![Latihan-3.4](Hasil-Js3-Latihan-3.4-2.png)>
 
 
 ### Latihan 3.5
@@ -109,4 +109,4 @@ echo "[$TIMESTAMP] Backup selesai" | tee -a backup-success.log
 chmod +x backup.sh
 ./backup.sh
 Hasil :
-<img![Latihan-3.5](Hasil-Js3-Latihan 3.5-2.png)>
+<img![Latihan-3.5](Hasil-Js3-Latihan-3.5-2.png)>
