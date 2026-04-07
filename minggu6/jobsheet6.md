@@ -10,12 +10,16 @@
 ps aux
 
 ```
+Hasil :
+![alt text](Js6-praktikum6.1_step1.png)
 
 2. Tampilkan proses beserta thread-nya, dapat dilihat pada kolom LWP (Light Weight Process ID):
 ```
 ps aux -L
 
 ```
+Hasil :
+![alt text](Js6-praktikum6.1_step2.png)
 
 3. Lihat PID shell aktif dan detail prosesnya:
 ```
@@ -23,12 +27,16 @@ echo $$
 ps -p $$ -f
 
 ```
+Hasil :
+![alt text](Js6-praktikum6.1_step3.png)
 
 4. Lihat hierarki proses secara visual:
 ```
 pstree -p
 
 ```
+Hasil :
+![alt text](Js6-praktikum6.1_step4.png)
 
 ### Latihan 6.1
 Jalankan ps aux dan amati outputnya:
@@ -37,13 +45,27 @@ Jalankan ps aux dan amati outputnya:
 
 Jawaban :
 
+Totalnya ada 100 proses yang berjalan dan yang memiliki PID terkecil yaitu /sbin/init dengan user root
+
+![TotalProses](<Screenshot 2026-04-07 000242.png>)
+
 2. Jalankan pstree -p dan temukan proses bash anda. Proses apa yang menjadi induk (PPID) dari bash tersebut ?
 
 Jawaban :
 
+PPID nya adalah bash(960)
+![alt text](Js6-praktikum6.1_step4-1.png)
+
 3. Bandingkan output ps aux dan ps aux -L. Apa perbedaan yang anda lihat ?
 
 Jawaban : 
+
+Perbedaan pada 2 command tersebut ada pada hasilnya, jika 
+ps aux -L ada LWP (Light Weight Process ID) dan NLWP (Number of Light Weight Processes)
+sedangkan jika ps aux saja tidak ada LWP dan NLWP
+![alt text](Js6-praktikum6.1_step1.png)
+
+![alt text](Js6-praktikum6.1_step2.png)
 
 
 ## Praktikum 6.2 — Mengamati Siklus Hidup Proses
