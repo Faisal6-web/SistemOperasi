@@ -309,3 +309,173 @@ Hasil :
 
 2. Ketik isi berikut:
 ```
+#!/bin/bash
+# Pengguna: ./backup-data.sh [-v] [-c] [-l logfile] <sumber> <tujuan>
+
+VERBOSE=false
+COMPRESS=false
+LOG_FILE=""
+
+while getopts "vcl:" OPSI; do
+    case $OPSI in
+        v) VERBOSE=true ;;
+        c) COMPRESS=true ;;
+        l) LOG_FILE="OPTARG" ;;
+        *) echo "Penggunaan: $0 [-v] [-c] [-l logfile] <sumber> <tujuan>"
+            exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+SUMBER=$1
+TUJUAN=$2
+
+log() {
+    local MSG="[$(date '+%T')] $1"
+    echo "$MSG"
+    [ -n "$LOG_FILE" ] && echo "$MSG" >> "$LOG_FILE"
+}
+
+[ -z "$SUMBER" ] || [ -z "$TUJUAN" ] && {
+    echo "ERROR: sumber dan tujuan wajib diisi"; exit 
+1; }
+
+[ ! -d "$SUMBER" ] && { log "ERROR: $SUMBER tidak ada"
+; exit 2; }
+
+mkdir -p "$TUJUAN"
+TANGGAL=$(date '+%F-%H%M%S')
+[ "$VERBOSE" = true ] && log "Sumber: $SUMBER | Tujuan : $TUJUAN"
+
+if [ "$COMPRESS" = true ]; then
+    ARSIP="$TUJUAN/backup-$(basename "$SUMBER")-$TANGGAL.tar.gz"
+    tar -czf "$ARSIP" -C "$(dirname "$SUMBER")" "$ (basename "$SUMBER")
+    log "Arsip: $ARSIP ($(du -sh "$ARSIP" | cut -f1))"
+else
+    cp -r "$SUMBER" "$TUJUAN/backup-$(basename "$SUMBER")-$TANGGAL"
+    log "Backup selesai."
+fi
+```
+Hasil :
+
+
+
+3. Beri izin dan uji:
+```
+chmod +x ~/praktikum-os/week09/scripts/backip-data.sh
+cd ~/praktikum-os/week09/scripts
+
+#Tanpa opsi
+./backup-data.sh ~/praktikum-os/week09/data ~/praktikum-os/week09/logs
+
+# Dengan verbose dan kompresi + log ke file
+./backup-data.sh -v -c -l ../logs/backup/log \ ~/praktikum-os/week09/data ~/praktikum-os/week09/logs
+
+cat ../logs/backup.log
+
+#!/bin/bash
+set -euo pipefail
+
+cleanup() { echo "[CLEANUP] selesai."; }
+trap cleanup EXIT           # cleanup dipanggil selalu saat script berakhir
+
+DEBUG=${DEBUG:-false}
+debug() { [ "$DEBUG" = true ] && echo "[DEBUG] $*" >&2; }
+
+debug "Script dimulai dengan PID $$"
+echo "Script berjalan normal"
+```
+Hasil :
+
+
+
+## Praktikum 9.6 Debugging Script
+1. Buat script untuk dianalisis:
+```
+nano ~/praktikum-os/week09/scripts/debug-latihan.sh
+```
+Hasil :
+
+
+
+2. Ketik isi berikut:
+```
+#!/bin/bash
+# Script: debug-latihan.sh
+# Penggunaan: ./debug-latihan.sh <direktori> <batas-MB>
+
+DIREKTORI=$1
+BATAS=$2
+
+if [ $# -ne 2 ]; then
+    echo "Penggunaan: $0 <direktori> <batas-MB>"
+    exit 1
+fi
+
+UKURAN=$(du -sm "$DIREKTORI" | cut -f1)
+
+echo "Direktori    : $DIREKTORI"
+echo "UKURAN       : ${UKURAN} MB"
+echo "Batas        : ${BATAS} MB"
+
+if [ "$UKURAN" -gt "$BATAS" ]; then
+    echo "PERINGATAN: Ukuran melebihi batas!"
+    echo "Kelebihan: $((UKURAN - BATAS)) MB"
+else
+    echo "Status: Normal (sisa: $((BATAS - UKURAN)) MB)"
+fi
+```
+Hasil :
+
+
+
+3. Cek sintaks, lalu jalankan dengan tracing:
+```
+chmod +x ~/praktikum-os/week09/scripts/debug-latihan.sh
+bash -n debug-latihan.sh && echo "Sintaks OK"
+bash -x debug-latihan.sh /etc 10
+./debug-latihan.sh /var 50
+./debug-latihan.sh
+```
+Hasil :
+
+
+
+### Latihan 9.6
+Soal :
+
+Script debug-latihan.sh tidak menangani direktori yang tidak ada. Perbaiki
+dengan menambahkan:
+• set -e di baris kedua
+• Pengecekan -d "$DIREKTORI" sebelum memanggil du
+• Pesan error yang informatif jika direktori tidak ditemukan
+Uji dengan direktori yang tidak ada.
+
+Jawaban :
+
+
+
+## TUGAS PRAKTIKUM
+### Tugas 1 Script Absensi Kelas
+1. Buat script absensi.sh yang:
+
+• Menerima argumen nama mahasiswa dan status (hadir/izin/alpha) Menyimpan entri ke absensi-YYYY-MM-DD.txt dengan format [HH:MM] NAMA - STATUS
+
+• Opsi -r: tampilkan rekapitulasi (jumlah per status)
+
+• Opsi -h: tampilkan bantuan
+
+2. Rekam minimal 5 entri dan tampilkan rekapitulasinya.
+
+
+### Tugas 2 Script Health Check Sistem
+1.  Buat script healthcheck.sh menggunakan template profesional dari bagian
+Best Practices.
+2. Script menampilkan: tanggal/waktu, hostname, uptime, penggunaan CPU,
+memori, dan disk untuk setiap filesystem yang terpasang.
+3. Jika penggunaan disk mana pun melebihi 80%, tampilkan peringatan.
+4. Simpan hasil ke healthcheck-YYYY-MM-DD.log dan tampilkan ke terminal
+sekaligus menggunakan tee.
+5. Opsi -t <persen> mengubah batas peringatan disk (default 80).
+Konsep wajib: set -euo pipefail, trap, getopts, fungsi dengan local,
+for, if, dan tee.
