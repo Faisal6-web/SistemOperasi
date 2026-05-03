@@ -11,7 +11,7 @@ mkdir -p ~/praktikum-os/week09/{scripts,logs,data}
 cd ~/praktikum-os/week09/scripts
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.1-step1.png)
 
 
 2. Buat script dengan nano:
@@ -19,7 +19,7 @@ Hasil :
 nano laporan-sistem.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.1-step2.png)
 
 
 3. Ketik isi berikut, simpan(Ctrl+O lalu Enter), lalu keluar(Ctrl+X)\
@@ -40,7 +40,7 @@ echo "Disk /    : $(df -h / | awk 'NR==2 {print $5}') terpakai"
 echo "========================================================="
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.1-step3.png)
 
 4. Beri izin dan jalankan:
 ```
@@ -48,7 +48,7 @@ chmod +x laporan-sistem.sh
 ./laporan-sistem.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.1-step4.png)
 
 ### Latihan 9.1
 Soal:
@@ -56,7 +56,7 @@ Soal:
 1. Modifikasi laporan-sistem.sh agar menyimpan output ke file laporan-YYYY-MM-DD.txt sekaligus menampilkannya di terminal. Petunjuk: gunakan tee yang sudah dipelajari di bab sebelumnya
 
 Jawaban :
-
+![alt text](Praktikum-os_Latihan9.1-.png)
 
 
 ## Praktikum 9.2 Script Info Sistem dengan Argumen
@@ -65,6 +65,7 @@ Jawaban :
 nano ~/praktikum-os/week09/scripts/info-sistem.sh
 ```
 Hasil :
+![alt text](Praktikum-os_9.2-step1.png)
 
 
 2. Ketik isi berikut:
@@ -90,7 +91,7 @@ else
 fi
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.2-step2.png)
 
 
 3. Simpan, beri izin, uji dengan berbagai kombinasi argumen:
@@ -101,7 +102,7 @@ chmod +x ~/praktikum-os/week09/scripts/info-sistem.sh
 ./info-sistem.sh "Dian" 10
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.2-step3.png)
 
 
 ### Latihan 9.2
@@ -111,7 +112,12 @@ Soal :
 
 Jawaban :
 
-
+Step  1:
+![alt text](Praktikum-os_Latihan9.2-step1.png)
+Step 2:
+![alt text](Praktikum-os_Latihan9.2-step2.png)
+Step 3:
+![alt text](Praktikum-os_Latihan9.2-step3.png)
 
 ## Praktikum 9.3 Script Grading dan Menu Interaktif
 1. Buat script grading (menggunakan if dan for):
@@ -119,6 +125,7 @@ Jawaban :
 nano ~/praktikum-os/week09/scripts/grading-batch.sh
 ```
 Hasil :
+![alt text](Praktikum-os_9.3-step1.png)
 
 
 2. Ketik isi berikut:
@@ -152,6 +159,8 @@ echo "============================================"
 ```
 Hasil :
 
+![alt text](Praktikum-os_9.3-step2.png)
+
 
 3. Simpan, beri izin dan jalankan:
 ```
@@ -159,14 +168,14 @@ chmod +x ~/praktikum-os/week09/scripts/grading-batch.sh
 ./grading-batch.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.3-step3.png)
 
 4. Buat script menu interaktif (while+case):
 ```
 nano ~/praktikum-os/week09/scripts/menu-sistem.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.3-step4.png)
 
 5. Ketik isi berikut:
 ```
@@ -193,6 +202,7 @@ done
 ```
 Hasil :
 
+![alt text](Praktikum-os_9.3-step5.png)
 
 6. Beri izin dan jalankan, coba setiap opsi:
 ```
@@ -201,7 +211,7 @@ chmod +x ~/praktikum-os/week09/scripts/menu-sistem.sh
 ```
 Hasil :
 
-
+![alt text](Praktikum-os_9.3-step6.png)
 
 ### Latihan 9.3
 Soal :
@@ -210,6 +220,7 @@ Tambahkan ke script grading-batch.sh sebuah ringkasan di bagian bawah yang menam
 
 Jawaban :
 
+![alt text](Praktikum-os_Latihan9.3.png)
 
 ## Praktikum 9.4 Library Fungsi Validasi
 1. Buat file library:
@@ -217,7 +228,7 @@ Jawaban :
 nano ~/praktikum-os/week09/scripts/lib-validasi.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.4-step1.png)
 
 2. Ketik isi berikut:
 ```
@@ -242,13 +253,14 @@ sukses() { echo "[OK] $1; }
 ```
 Hasil :
 
+![alt text](Praktikum-os_9.4-step2.png)
 
-3. Buat script yang menggunkan library: 
+3. Buat script yang menggunakan library: 
 ```
 nano ~/praktikum-os/week09/scripts/pakai-library.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.4-step3.png)
 
 
 4. Ketik isi berikut:
@@ -278,6 +290,7 @@ fi
 ```
 Hasil :
 
+![alt text](Praktikum-os_9.4-step4.png)
 
 5. Beri izin dan uji semua skenario:
 ```
@@ -288,7 +301,7 @@ chmod +x ~/praktikum-os/week09/scripts/pakai-library.sh
 ./pakai-library.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.4-step5.png)
 
 ### Latihan 9.4
 Soal :
@@ -297,7 +310,17 @@ Tambahkan fungsi konfirmasi() ke lib-validasi.sh. Fungsi ini menampilkan pertany
 
 Jawaban :
 
+Step 1:
 
+![alt text](Praktikum-os_Latihan9.4-step1.png)
+
+Step 2:
+![alt text](Praktikum-os_Latihan9.4-step2.png)
+Step 3: 
+![alt text](Praktikum-os_Latihan9.4-step3.png)
+
+Step 4:
+![alt text](Praktikum-os_Latihan9.4-step4.png)
 
 ## Praktikum 9.5 Script Backup dengan Opsi
 1. Buat script:
@@ -305,7 +328,7 @@ Jawaban :
 nano ~/praktikum-os/week09/scripts/backup-data.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.5-step1.png)
 
 2. Ketik isi berikut:
 ```
@@ -357,7 +380,7 @@ else
 fi
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.5-step2.png)
 
 
 3. Beri izin dan uji:
@@ -386,7 +409,7 @@ debug "Script dimulai dengan PID $$"
 echo "Script berjalan normal"
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.5-step3.png)
 
 
 ## Praktikum 9.6 Debugging Script
@@ -395,7 +418,7 @@ Hasil :
 nano ~/praktikum-os/week09/scripts/debug-latihan.sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_9.6-step1.png)
 
 
 2. Ketik isi berikut:
@@ -427,6 +450,7 @@ fi
 ```
 Hasil :
 
+![alt text](Praktikum-os_9.6-step2.png)
 
 
 3. Cek sintaks, lalu jalankan dengan tracing:
@@ -438,7 +462,9 @@ bash -x debug-latihan.sh /etc 10
 ./debug-latihan.sh
 ```
 Hasil :
+![alt text](Praktikum-os_9.6-step3(1).png)
 
+![alt text](Praktikum-os_9.6-step3(2).png)
 
 
 ### Latihan 9.6
@@ -453,6 +479,12 @@ Uji dengan direktori yang tidak ada.
 
 Jawaban :
 
+Step 1:
+![alt text](Praktikum-os_Latian9.6-step1.png)
+Step 2:
+![alt text](Praktikum-os_Latian9.6-step2.png)
+Step 3:
+![alt text](Praktikum-os_Latian9.6-step3.png)
 
 
 ## TUGAS PRAKTIKUM
@@ -467,6 +499,18 @@ Jawaban :
 
 2. Rekam minimal 5 entri dan tampilkan rekapitulasinya.
 
+Jawaban :
+
+Step 1:
+![alt text](Praktikum-os_9_Tugas1(step1).png)
+
+Step 2:
+![alt text](Praktikum-os_9_Tugas1(step2.1).png)
+
+![alt text](Praktikum-os_9_Tugas1(step2.2).png)
+Step 3:
+![alt text](Praktikum-os_9_Tugas1(step3).png)
+
 
 ### Tugas 2 Script Health Check Sistem
 1.  Buat script healthcheck.sh menggunakan template profesional dari bagian
@@ -479,3 +523,15 @@ sekaligus menggunakan tee.
 5. Opsi -t <persen> mengubah batas peringatan disk (default 80).
 Konsep wajib: set -euo pipefail, trap, getopts, fungsi dengan local,
 for, if, dan tee.
+
+Jawaban :
+
+Step 1:
+![alt text](Praktikum-os_9_Tugas2(step1).png)
+
+Step 2:
+![alt text](Praktikum-os_9_Tugas2(step2.1).png)
+
+![alt text](Praktikum-os_9_Tugas2(step2.2).png)
+Step 3:
+![alt text](Praktikum-os_9_Tugas2(step3).png)
