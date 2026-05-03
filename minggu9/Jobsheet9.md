@@ -534,3 +534,4 @@ Step 2:
 
 ![alt text](Praktikum-os_9_Tugas2(step2.2).png)
 Step 3:
+![alt text](Praktikum-os_9_Tugas2(step3).png)
