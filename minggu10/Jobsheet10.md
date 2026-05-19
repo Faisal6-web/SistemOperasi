@@ -10,18 +10,15 @@
 free -h
 ```
 Hasil :
-
+![alt text](<Praktikum 10.1_step1.png>)
 
 2. Lihat detail memori dari kernel melalui /proc/meminfo
 ```
 cat / proc / meminfo | head -n 20
 ```
 Hasil :
+![alt text](<Praktikum 10.1_step2.png>)
 
-Analisis:
-1. Hitung persentase memori tersedia: available / total × 100%. Jika hasilnya di bawah 10%, sistem mulai kekurangan memori
-2. Pada baris Swap, apakah kolom used bernilai 0? Jika lebih dari 0, kernel sudah pernah memindahkan data ke disk karena RAM tidak cukup
-3. Perhatikan field Cached dan Buffers di /proc/meminfo. Nilai ini sesuai dengan kolom buff/cache pada free -h
 
 ### Studi Kasus 10.1 Server Lambat karena Memori
 1. Periksa kondisi memori secara keseluruhan
@@ -29,17 +26,15 @@ Analisis:
 free -h
 ```
 Hasil :
+![alt text](<Studi Kasus 10.1_step1.png>)
 
 2. Pantau proses secara real-time
 ``` 
 top
 ```
 Hasil :
+![alt text](<Studi Kasus 10.1_step2.png>)
 
-Analisis:
-1. Apakah nilai available sangat kecil (misalnya di bawah 200 MB pada server dengan RAM 2 GB)? Jika ya, server kemungkinan kekurangan memori
-2. Apakah kolom used pada baris Swap lebih dari 0? Jika ya, kernel sedang menggunakan swap, yang berarti performa menurun
-3. Di tampilan top, proses apa yang memiliki %MEM terbesar? Proses tersebut menjadi kandidat utama penyebab lambatnya server
 
 ## Praktikum 10.2 Mengamati Aktivitas Paging
 1.  Jalankan vmstat dengan interval 1 detik, 5 sampel
@@ -47,12 +42,7 @@ Analisis:
 vmstat 1 5
 ```
 Hasil :
-
-Analisis:
-1. Amati nilai si dan so pada kelima baris. Pada sistem normal dengan RAM cukup, kedua nilai ini selalu 0
-2. Jika nilai si atau so sesekali muncul lebih dari 0, artinya pernah ada aktivitas swap. Ini masih wajar jika tidak terus-menerus
-3. Jika si dan so terus-menerus lebih dari 0, sistem dalam kondisi memory pressure serius — performa turun drastis karena akses disk jauh lebih lambat dari RAM
-4. Perhatikan juga kolom free (RAM kosong) dan buff (buffer) untuk memahami kondisi keseluruhan RAM saat itu
+![alt text](<Praktikum 10.2_step1.png>)
 
 
 ## Praktikum 10.3 Membuat dan Mengonfigurasi Swap File
@@ -61,6 +51,7 @@ Analisis:
 sudo fallocate -l 512 M / swapfile - week10
 ```
 Hasil :
+
 
 
 2. Atur permission file menjadi 600 — hanya root yang boleh membaca dan menulis
