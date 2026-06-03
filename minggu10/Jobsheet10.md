@@ -51,7 +51,7 @@ Hasil :
 sudo fallocate -l 512 M / swapfile - week10
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.3_step1.png)
 
 
 2. Atur permission file menjadi 600 — hanya root yang boleh membaca dan menulis
@@ -59,7 +59,7 @@ Hasil :
 sudo chmod 600 / swapfile - week10
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.3_step2.png)
 
 3. Format file sebagai area swap, lalu aktifkan
 ```
@@ -67,7 +67,7 @@ sudo mkswap / swapfile - week10
 sudo swapon / swapfile - week10
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.3_step3.png)
 
 4. Verifikasi swap aktif. Anda akan melihat entri /swapfile-week10 dengan ukuran 512M, dan nilai total pada baris Swap di free -h bertambah 512M
 ```
@@ -75,7 +75,7 @@ swapon -- show
 free -h
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.3_step4.png)
 
 5. Periksa nilai swappiness, ubah sementara, dan verifikasi perubahan
 ```
@@ -84,11 +84,19 @@ sudo sysctl vm . swappiness =10
 cat / proc / sys / vm / swappiness
 ```
 Hasil :
+![alt text](Praktikum-os_10.3_step5.png)
+
 
 Analisis:
 1. Berapa nilai swappiness default? Apa artinya bagi perilaku kernel dalam menggunakan swap?
 2. Setelah diubah ke 10, konfirmasi nilai berubah pada output cat kedua. Apa dampak nilai 10 terhadap penggunaan swap dibanding nilai 60?
 3. Apakah entri /swapfile-week10 muncul di swapon –show? Jika tidak, pastikan Langkah 2 (chmod 600) sudah dijalankan sebelum Langkah 3
+
+Jawaban :
+
+1. Nilai defaultnya 60, yang berarti bahwa kernel tidak membuang semua page canche, tetapi tidak juga menaruh aplikasi ke swap secara agresif
+2. Aplikasi yang sedang dijalankan menjadi lebih responsif, terutama saat berpindah-pindah aplikasi atau multitasking
+3. entri /swapfile-week10 muncul di swapon --show dan hasilnya ada di gambar di langkah 4
 
 
 ## Praktikum 10.4 Monitoring Memory
@@ -97,19 +105,14 @@ Analisis:
 ps aux -- sort = -% mem | head
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.4_step1.png)
 
 2. Pantau secara real-time dengan top
 ```
 top
 ```
 Hasil :
-
-Analisis:
-1. Proses apa yang berada di urutan pertama? Catat nilai %MEM dan RSS-nya.
-2. Konversikan RSS dari KB ke MB (bagi 1024). Misalnya, RSS=524288 berarti proses menggunakan 512 MB RAM. Apakah wajar untuk jenis program tersebut?
-3. Mengapa VSZ selalu lebih besar dari RSS pada proses yang sama?
-4. Apakah urutan proses di ps konsisten dengan tampilan top saat diurutkan berdasarkan %MEM?
+![alt text](Praktikum-os_10.4_step2.png)
 
 
 ## Praktikum 10.5 Script Monitor Memori
@@ -119,7 +122,7 @@ cd ~/ praktikum - os / week10 - memory
 nano monitor - memori . sh
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.5_step1.png)
 
 2. Ketik script berikut:
 ```
@@ -142,6 +145,7 @@ echo " - - - 5 Proses Memori Tertinggi - - -"
 ps aux -- sort = -% mem | head -n 6 | tail -n 5
 ```
 Hasil :
+![alt text](Praktikum-os_10.5_step2.png)
 
 3. izinkan dan jalankan
 ```
@@ -149,11 +153,8 @@ chmod + x monitor - memori . sh
 bash monitor - memori . sh
 ```
 Hasil :
+![alt text](Praktikum-os_10.5_step3.png)
 
-Analisis
-1. Variabel THRESHOLD=20 menetapkan batas persentase. Perintah free | awk ’/Mem/ {printf "%d", $7/$2*100}’ mengambil kolom ke-7 (available) dibagi kolom ke-2 (total) dari baris Mem, lalu dikalikan 100 untuk menghasilkan persentase bilangan bulat
-2. Kondisi if [ "$AVAIL" -lt "$THRESHOLD" ] bernilai benar jika persentase memori tersedia di bawah 20
-3. Ubah THRESHOLD menjadi 90 dan jalankan ulang. Apa yang berubah pada output? Mengapa demikian?
 
 ### Studi Kasus 10.2 Gagal Akses File
 1. Buat direktori dan file konfigurasi contoh
@@ -165,6 +166,7 @@ ls -l app . conf
 cat app . conf
 ```
 Hasil :
+![alt text](<Studi Kasus-os_10.2_step 1.png>)
 
 2. Simulasikan permission bermasalah
 ```
@@ -172,7 +174,7 @@ chmod 000 app . conf
 cat app . conf
 ```
 Hasil :
-
+![alt text](<Studi Kasus-os_10.2_step 2.png>)
 
 3. Kembalikan permission dan verifikasi
 ```
@@ -180,7 +182,7 @@ chmod 644 app . conf
 cat app . conf
 ```
 Hasil :
-
+![alt text](<Studi Kasus-os_10.2_step 3.png>)
 
 Analisis:
 1. Mengapa cat menghasilkan Permission denied setelah chmod 000? System call apa yang gagal?
@@ -194,7 +196,7 @@ Analisis:
 strace ls 2 >&1 | head -n 30
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.6_step1.png)
 
 2. Lihat ringkasan statistik dan bandingkan dua direktori berbeda
 ```
@@ -202,7 +204,7 @@ strace -c ls
 strace -c ls / etc 2 >&1 | tail -5
 ```
 Hasil :
-
+![alt text](Praktikum-os_10.6_step2.png)
 
 Analisis:
 1. Dari output Langkah 1, identifikasi minimal 4 system call berbeda. Jelaskan fungsi singkat masing-masing berdasarkan argumen yang terlihat
