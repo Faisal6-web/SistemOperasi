@@ -23,6 +23,7 @@ systemctl list - unit - files -- type = service | head -30
 Hasil:
 
 
+
 3. Analisis waktu boot dan temukan layanan paling lambat.
 ```
 systemd - analyze
