@@ -11,7 +11,7 @@ systemctl list - units -- type = service -- state = running
 # catat berapa banyak layanan yang aktif
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.1_step1.png)
 
 2. Lihat semua unit service yang ada (aktif maupun tidak).
 ```
@@ -21,7 +21,7 @@ systemctl list - unit - files -- type = service | head -30
 # static = tidak bisa di - enable / disable , hanya dipanggil oleh layanan lain
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.1_step2.png)
 
 3. Analisis waktu boot dan temukan layanan paling lambat.
 ```
@@ -29,7 +29,7 @@ systemd - analyze
 systemd - analyze blame | head -15
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.1_step3.png)
 
 
 ## Praktikum 12.2: Kelola Layanan SSH
@@ -40,7 +40,7 @@ systemctl is - active ssh
 systemctl is - enabled ssh
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.2_step1.png)
 
 2. Lakukan restart dan pantau perubahannya.
 ```
@@ -49,7 +49,7 @@ systemctl status ssh
 # perhatikan : Loaded , Active , dan Main PID bisa berubah setelah restart
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.2_step2.png)
 
 3. Lihat dependensi SSH.
 ```
@@ -57,7 +57,9 @@ systemctl list - dependencies ssh
 # layanan lain yang harus aktif sebelum SSH bisa berjalan
 ```
 Hasil:
+![alt text](Praktikum-os_12.2_step3.1.png) 
 
+![alt text](Praktikum-os_12.2_step3.2.png)
 
 4. Cek semua unit yang gagal di sistem.
 ```
@@ -65,7 +67,7 @@ systemctl -- failed
 # jika ada , ini adalah daftar layanan yang butuh perhatian
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.2_step4.png)
 
 
 ## Praktikum 12.3: Buat Layanan Sederhana dari Skrip Bash
@@ -84,7 +86,8 @@ nano situs - demo / index . html
 </ html >
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step1.1.png)
+ ![alt text](Praktikum-os_12.3_step1.2.png)
 
 2. Buat skrip wrapper untuk server HTTP.
 ```
@@ -98,7 +101,8 @@ exec python3 -m http . server $PORT -- directory " $DIREKTORI "
 chmod + x ~/ lab - os / chapter10 - services / jalankan - server . sh
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step2.1.png) 
+![alt text](Praktikum-os_12.3_step2.2.png)
 
 3. Buat berkas unit systemd untuk layanan ini.
 ```
@@ -124,7 +128,9 @@ system / demo - web . service
 sudo systemctl daemon - reload
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step3.1.png) 
+![alt text](Praktikum-os_12.3_step3.3.png) 
+![alt text](Praktikum-os_12.3_step3.2.png)
 
 4. Jalankan layanan dan verifikasi.
 ```
@@ -134,7 +140,7 @@ systemctl status demo - web
 curl http :// localhost :9090
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step4.png)
 
 5. Uji fitur restart otomatis.
 ```
@@ -149,7 +155,7 @@ systemctl status demo - web
 # PID akan berubah karena proses baru dijalankan
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step5.png)
 
 6. Bersihkan layanan uji setelah selesai.
 ```
@@ -158,7 +164,7 @@ sudo rm / etc / systemd / system / demo - web . service
 sudo systemctl daemon - reload
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.3_step6.png)
 
 
 ## Praktikum 12.4: Filter dan Analisis Log Layanan
@@ -169,7 +175,7 @@ journalctl -u ssh -- since "1 hour ago" --no - pager
 journalctl -u cron -- since "1 hour ago" --no - pager
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.4_step1.png)
 
 2. Filter log berprioritas error ke atas.
 ```
@@ -177,7 +183,7 @@ journalctl -b -p err --no - pager
 # ini menampilkan semua error dan yang lebih serius sejak boot
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.4_step2.png)
 
 3. Ikuti log secara real-time sambil memicu aktivitas.
 ```
@@ -188,7 +194,8 @@ journalctl -u ssh -f
 # lalu lihat apa yang muncul di terminal pertama
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.4_step3.1.png) 
+![alt text](Praktikum-os_12.4_step3.2.png)
 
 4. Ekstrak log ke berkas untuk analisis.
 ```
@@ -201,7 +208,7 @@ wc -l log - ssh - hari - ini . txt
 grep -i " error \| failed " log - ssh - hari - ini . txt | head -20
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.4_step4.png)
 
 
 ## Praktikum 12.5: Konfigurasi SSH Server
@@ -211,7 +218,7 @@ sudo grep -n "^ Port \|^# Port " / etc / ssh / sshd_config
 ss - tlnp | grep ssh
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.5_step1&2.png)
 
 2. Buat backup dan ubah port SSH.
 ```
@@ -224,7 +231,7 @@ sudo sed -i 's /^# Port 22/ Port 2222/ ' / etc / ssh / sshd_config
 grep "^ Port " / etc / ssh / sshd_config
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.5_step1&2-1.png)
 
 3. Validasi konfigurasi dan restart layanan.
 ```
@@ -237,7 +244,7 @@ sudo systemctl restart ssh
 systemctl status ssh
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.5_step3.png)
 
 4. Verifikasi port baru dengan ss.
 ```
@@ -248,7 +255,7 @@ ss - tlnp | grep ssh > ~/ lab - os / chapter10 - services / bukti - port - ssh .
 cat ~/ lab - os / chapter10 - services / bukti - port - ssh . txt
 ```
 Hasil:
-
+![alt text](Praktikum-os_12.5_step4.png)
 
 5. Kembalikan port SSH ke 22 setelah praktek.
 ```
@@ -258,32 +265,3 @@ sudo systemctl restart ssh
 ss - tlnp | grep ssh
 # harus kembali ke port 22
 ```
-Hasil:
-
-
-
-## Latihan
-### Latihan 12.1 Audit Layanan dan Analisis Boot
-Lakukan audit menyeluruh terhadap layanan yang berjalan di sistem.
-1. Jalankan systemctl list-units –type=service –state=running dan catat semua layanan aktif. Pilih tiga layanan yang kamu kenal, periksa status masing-masing dengan
-systemctl status, dan jelaskan fungsinya.
-2. Jalankan systemd-analyze blame dan identifikasi lima layanan dengan waktu inisialisasi terlama. Tampilkan hasilnya menggunakan pipeline: systemd-analyze blame | head -5.
-3. Jalankan systemctl –failed dan dokumentasikan hasilnya. Jika ada layanan yang gagal, cari tahu penyebabnya dengan journalctl -u nama-layanan -n 30.
-
-
-### Latihan 12.2 Layanan Kustom dengan Restart Otomatis
-Buat layanan systemd kustom yang mendemonstrasikan fitur restart otomatis.
-1. Buat skrip Bash (referensi Bab 7) bernama monitor-disk.sh yang setiap 30 detik menuliskan penggunaan disk ke berkas log. Gunakan df -h dan date.
-2. Buat berkas unit /etc/systemd/system/monitor-disk.service untuk menjalankan skrip tersebut dengan konfigurasi: Restart=always, RestartSec=5s, dan berjalan sebagai pengguna kamu sendiri.
-3. Aktifkan dan jalankan layanan. Verifikasi dengan systemctl status dan pastikan log masuk ke journal.
-4. Simulasikan crash dengan membunuh proses secara paksa (kill -9), tunggu 10 detik, dan verifikasi bahwa layanan hidup kembali secara otomatis.
-5. Bersihkan: nonaktifkan layanan dan hapus berkas unit setelah selesai.
-
-
-
-### Latihan 10.3 Investigasi Log dan Keamanan SSH
-Analisis log sistem dan tingkatkan keamanan konfigurasi SSH.
-1. Gunakan journalctl -b -p err untuk menemukan semua error sejak boot terakhir. Simpan hasilnya ke berkas dan hitung jumlah baris dengan wc -l.
-2. Lakukan tiga perubahan keamanan pada /etc/ssh/sshd_config: tambahkan PermitRootLogin no, MaxAuthTries 3, dan LoginGraceTime 30. Ikuti alur aman: backup, edit, validasi sshd -t, reload.
-3. Setelah reload, verifikasi tiga hal: layanan masih berjalan (systemctl status ssh), port masih mendengarkan (ss -tlnp | grep ssh), dan konfigurasi baru terbaca (grep -E "PermitRoot|MaxAuth|GraceTime" /etc/ssh/sshd_config).
-4. Kembalikan konfigurasi SSH ke kondisi semula menggunakan berkas backup.
